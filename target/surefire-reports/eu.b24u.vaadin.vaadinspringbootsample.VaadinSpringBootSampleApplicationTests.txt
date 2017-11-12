@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: eu.b24u.vaadin.vaadinspringbootsample.VaadinSpringBootSampleApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.655 sec - in eu.b24u.vaadin.vaadinspringbootsample.VaadinSpringBootSampleApplicationTests
