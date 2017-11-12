@@ -4,12 +4,16 @@ import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.annotations.Viewport;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomLayout;
+import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -43,6 +47,7 @@ import com.vaadin.ui.VerticalLayout;
 
 @SpringUI
 @Theme("mytheme")
+@Viewport("initial-scale=1, maximum-scale=1")
 @SuppressWarnings("serial")
 public class MyUI extends UI {
 
@@ -71,9 +76,23 @@ public class MyUI extends UI {
     loginPanel.setSizeUndefined();
 
     // No captions for fields is they are provided in the template
-    content.addComponent(new TextField(), "username");
-    content.addComponent(new TextField(), "password");
-    content.addComponent(new Button("Login"), "okbutton");
+    TextField username = new TextField();
+    content.addComponent(username, "username");
+    PasswordField password = new PasswordField();
+    content.addComponent(password, "password");
+    Button loginButton = new Button(); 
+    content.addComponent(loginButton, "okbutton");
+    loginButton.addClickListener(e->{
+    	if(username.getValue().equals("admin")&&password.getValue().equals("secret")) {
+    		Notification.show("OK");
+    		FormLayout secretLayout = new FormLayout();
+    		secretLayout.addComponent(new Label("My secret page"));
+    		setContent(secretLayout);
+    	}else {
+    		Notification.show("ERROR");
+    	}
+    });
+    loginButton.setCaption("Login");
     
     setContent(content);
   }
